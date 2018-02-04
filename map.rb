@@ -15,7 +15,7 @@ module Map
     def go(direction)
       return @paths[direction]
     end
-  
+                                                     
     def add_paths(paths)
       @paths.update(paths)
     end
@@ -72,18 +72,112 @@ module Map
 
   HALLWAY1 = Room.new("Hallway1",
     """
-  There are two doors to the left and three doors to the right
+  There is a door to the left and a door to the right.
   A door straight shead leads to the cafeteria, but that's a stupid move.
   
   You can enter:
   - left door 1
-  - left door 2
   - right door 1
-  - right door 2
-  - right door 3
+  - cafeteria
+  
   
   Enter below:
     """)
+    
+     JANITOR = Room.new("Janitor",
+    """
+    The janitor's closet is strangely open. You cautiously open the door
+    expecting something sinister. Fortunatly all you are met with is the smell
+    of chlorine and cleaning supplies. A shelf is on the right, and a small wastebasket
+    is in a corner of the room. 
+    
+    You decide to search:
+    - the shelf
+    - the wastebasket
+    
+    Enter below:
+    """)
+    
+     CLASSROOM = Room.new("Classroom",
+    """
+    Exploring the shelf, you come across a strange piece of paper with the numbers 302 and
+    11345 written on it. The only thing that comes to mind is visitng room 302. You sneak your way
+    to the room while occasionally ducking into a bathroom. In the room you find a two tanks containing
+    fish and turtles respectivley. There is a computer in the room as well.
+    
+    Your search leads you to search the:
+    - fish tank
+    - turtle tank
+    
+    Enter below:
+    """) 
+    
+     TURTLE = Room.new("Turtle",
+    """
+   You look at the turtles in the tank. Nothing seems out of place. By chance, you
+   notice that some of the rocks in the tank have been moved. You turn them over
+   only to find that one of them has a slip of paper under it. What is this a scavenger hunt.
+   Unlike the other one, this one only has the words 'boiler room' written on it. Arriving at the 
+   room you come across a great sight. All the missing phones are in a small box. 
+   
+   Your gut tell you to:
+    - keep the phones
+    - alert the teachers
+    
+    Enter below:
+    """)
+    
+     FISH = Room.new("Fish",
+    """
+   You look at the fish for awhile and decide that there is nothing
+   wrong with them. You feel like you've wasted time from your life that
+   you'll never get back.
+    
+    You decide to:
+    - search the room again
+    - back out to the hallway
+    
+    Enter below:
+    """)
+    
+     CLASSROOM2 = Room.new("Classroom2",
+    """
+  The room you has only the turtle tank left to explore so you:
+    
+    
+    - check out the tank
+    
+    Enter below:
+    """)
+     
+    WASTE = Room.new("Waste",
+    """
+  You kick down the wastebasket to see what's inside. No way your putting your
+  hand in there. To your suprise there is a little piece of paper under the basket.
+  You take a tissue and read it to find that the only thing written on the paper
+  is libreria and the numbers 256. Not knowing where to go based on this, you sit
+  back and think.
+    
+    You make up your mind to:
+    - go to the library
+    - go to the teachers lounge
+    
+    Enter below:
+    """)
+    
+     LIBRARY = Room.new("Library",
+    """
+   Your stop at the library makes everything clear. The number on the paper obviously meant 
+   the dewy decimal system. When looking near the number, you find a small box tucked away.
+   It's the missing phones! What are they doing here, you ask yourself.
+    
+    You decide to:
+    - leave the phones
+    - drop off the phones at the librarians desk
+    
+    Enter below:
+    """)
+  
     
     LOCKED_ROOM = Room.new("Locked_room",
     """
@@ -160,14 +254,6 @@ module Map
     
     INTER = Room.new("Inter",
     """
-  Alright you got him on the ropes
-  
-  Do you ask about:
-  
-  - the person wearing the hood
-  - the missing phone
-    
-    Enter below:
     """)
     
      HEADMASTER = Room.new("Headmaster",
@@ -227,6 +313,39 @@ module Map
     on your success. Everything feels resolved.... right?
     """
     )
+    
+    NEUTRAL_END = Room.new("The End",
+    """
+    You leave the phones, but day by day you sell one or two. You manage to pin
+    the crime on someone else by leaving a stolen phone in their locker.
+    You continue to sell and setal new phones. And nobody is none the wiser.
+    """
+    )
+    
+    BAD_END = Room.new("The End",
+    """
+    You try to desperately convince teachers about what you found,
+    but no one believes you. Some eventually came around, but they found
+    nothing and think you are just a liar. You should have kept your mouth shut.
+    """
+    )
+    
+    NEUTRAL_END2 = Room.new("The End",
+    """
+    You drop off the phones where they are recovered and delivered to their
+    owners. No one ever knows you were the one who found it, but since they are back, you
+    are no longer held responsible. You never did find out the real culprit, but maybe that is 
+    for the best.
+    """
+    )
+    
+    BAD_END2 = Room.new("The End",
+    """
+    You decide to leave the phones there and come back for them later. Unfortunately, a librarian
+    saw you and also found the stash of phones. This would serve as damning evidence of your crime.
+    You are expelled from school, and the real culprit was never found.
+    """
+    )
 
   DEATH = Room.new("death", "You died.")
   
@@ -246,11 +365,9 @@ module Map
   })
     
   HALLWAY1.add_paths({
-    'left door 1' => HALLWAY1,
-    'left door 2' => ALONSO,
-    'right door 1' => DEATH,
-    'right door 2' => ALAC, 
-    'right door 3' => HALLWAY1
+    'left door 1' => ALSONSO,
+    'right door 1' => ALAC, 
+    'cafeteria' => DEATH,
   })
   
    ALAC.add_paths({
@@ -262,6 +379,40 @@ module Map
     'trash' => LOCKED_ROOM,
     'desk' => ALAC,
     'cabinet' => LOCKED_ROOM
+  })
+  
+   JANITOR.add_paths({
+    'shelf' => CLASSROOM,
+    'wastebasket' => WASTE,
+  })
+  
+   CLASSROOM.add_paths({
+    'fish tank' => FISH,
+    'turtle tank' => TURTLE
+  })
+  
+   FISH.add_paths({
+    'search the room again' => CLASSROOM2,
+    'back out to the hallway' => HALLWAY1
+  })
+  
+   TURTLE.add_paths({
+    'keep the phones' => NEUTRAL_END,
+    'alert the teachers' => BAD_END,
+  })
+  
+   CLASSROOM2.add_paths({
+    'check out the tank' => TURTLE
+  })
+  
+   WASTE.add_paths({
+    'go to the library' => LIBRARY,
+    'go to the teachers lounge' => LOCKED_ROOM,
+  })
+  
+   LIBRARY.add_paths({
+    'leave the phones' => BAD_END2,
+    'drop off the phones on the librarians desk' => NEUTRAL_END2
   })
   
    CHASE.add_paths({
@@ -332,3 +483,4 @@ module Map
   end
 
 end
+
