@@ -7,7 +7,6 @@ module Map
       @description = description
       @paths = {}
     end
-  
     attr_reader :name
     attr_reader :paths
     attr_reader :description
@@ -72,12 +71,13 @@ module Map
 
   HALLWAY1 = Room.new("Hallway1",
     """
-  There is a door to the left and a door to the right.
+  There is a door to the left and two doors to the right.
   A door straight shead leads to the cafeteria, but that's a stupid move.
   
   You can enter:
   - left door 1
   - right door 1
+  - right door 2
   - cafeteria
   
   
@@ -365,8 +365,9 @@ module Map
   })
     
   HALLWAY1.add_paths({
-    'left door 1' => ALSONSO,
-    'right door 1' => ALAC, 
+    'left door 1' => ALONSO,
+    'right door 1' => ALAC,
+    'right door 2' => JANITOR,
     'cafeteria' => DEATH,
   })
   
@@ -382,8 +383,8 @@ module Map
   })
   
    JANITOR.add_paths({
-    'shelf' => CLASSROOM,
-    'wastebasket' => WASTE,
+    'the shelf' => CLASSROOM,
+    'the wastebasket' => WASTE,
   })
   
    CLASSROOM.add_paths({
@@ -469,6 +470,17 @@ module Map
     'HEADMASTER' => HEADMASTER,
     'OUTSMART' => OUTSMART,
     'LIT' => LIT,
+    'JANITOR' => JANITOR,
+    'CLASSROOM' => CLASSROOM,
+    'TURTLE' => TURTLE,
+    'FISH' => FISH,
+    'CLASSROOM2' => CLASSROOM2,
+    'WASTE' => WASTE,
+    'LIBRARY' => LIBRARY,
+    'NEUTRAL_END' => NEUTRAL_END,
+    'NEUTRAL_END2' => NEUTRAL_END2,
+    'BAD_END' => BAD_END,
+    'BAD_END2' => BAD_END2,
     'THE_END_WINNER' => THE_END_WINNER,
     'THE_END_WINNER2' => THE_END_WINNER2,
     'START' => START,
